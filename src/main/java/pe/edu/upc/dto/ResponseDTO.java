@@ -23,4 +23,6 @@ public class ResponseDTO {
 	private AdministratorDTO administrator;
 	private List<BoxDTO> boxes;
 	private BoxDTO box;
+	private SubscriptionDTO subscription;
+	private List<SubscriptionDTO> subscriptions;
 }

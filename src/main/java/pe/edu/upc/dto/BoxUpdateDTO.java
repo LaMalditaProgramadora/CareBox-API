@@ -1,7 +1,5 @@
 package pe.edu.upc.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +9,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BoxDTO {
+public class BoxUpdateDTO {
 
 	private int idBox;
+	private String email;
 	private double price;
-	private boolean personalized;
 	private String name;
-	private List<ProductDTO> products;
+	private int[] idProducts;
+
 }

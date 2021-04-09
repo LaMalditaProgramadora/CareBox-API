@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.edu.upc.dto.BoxCreateDTO;
 import pe.edu.upc.dto.BoxDTO;
+import pe.edu.upc.dto.BoxUpdateDTO;
 import pe.edu.upc.dto.ResponseDTO;
+import pe.edu.upc.dto.SaveDefaultBoxDTO;
 import pe.edu.upc.service.BoxService;
 
 @CrossOrigin
@@ -152,6 +155,38 @@ public class BoxController {
 			BoxDTO boxDTO = boxService.createDefault(boxCreateDTO);
 			respuestaDTO.setStatus(1);
 			respuestaDTO.setMessage("Creación exitosa");
+			respuestaDTO.setBox(boxDTO);
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+
+		return ResponseEntity.ok(respuestaDTO);
+	}
+	
+	@PutMapping(path = "/saveDefaultBox", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> saveDefaultBox(@RequestBody SaveDefaultBoxDTO saveDefaultBoxDTO) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			BoxDTO boxDTO = boxService.saveDefaultBox(saveDefaultBoxDTO);
+			respuestaDTO.setStatus(1);
+			respuestaDTO.setMessage("Asociación exitosa");
+			respuestaDTO.setBox(boxDTO);
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+
+		return ResponseEntity.ok(respuestaDTO);
+	}
+	
+	@PutMapping(path = "/updateBoxPersonalized", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<?> updateBoxPersonalized(@RequestBody BoxUpdateDTO boxUpdateDTO) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			BoxDTO boxDTO = boxService.update(boxUpdateDTO);
+			respuestaDTO.setStatus(1);
+			respuestaDTO.setMessage("Actualización exitosa");
 			respuestaDTO.setBox(boxDTO);
 		} catch (Exception e) {
 			respuestaDTO.setStatus(-2);
