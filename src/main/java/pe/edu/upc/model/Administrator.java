@@ -18,26 +18,26 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "administradores")
+@Table(name = "administrators")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Administrador {
+public class Administrator {
 	
 	@Id
-	@Column(name = "idAdministrador")
+	@Column(name = "idAdministrator")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idAdministrador;
+	private int idAdministrator;
 	
-	@Column(name = "nombres")
-	private String nombres;
+	@Column(name = "names")
+	private String names;
 	
-	@Column(name = "apellidos")
-	private String apellidos;
+	@Column(name = "lastNames")
+	private String lastNames;
 	
-	@Column(name = "telefono")
-	private String telefono;
+	@Column(name = "phone")
+	private String phone;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-	private Usuario usuario;
+	@JoinColumn(name = "idUserLogin", referencedColumnName = "idUserLogin")
+	private UserLogin userLogin;
 }

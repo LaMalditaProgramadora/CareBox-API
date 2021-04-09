@@ -29,22 +29,22 @@ public class Box {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idBox;
 	
-	@Column(name = "precio")
-	private float precio;
+	@Column(name = "price")
+	private double price;
 	
-	@Column(name = "esPersonalizado")
-	private boolean esPersonalizado;
+	@Column(name = "personalized")
+	private boolean personalized;
 	
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "name")
+	private String name;
 	
 	@ManyToMany(mappedBy = "boxes")
-	List<Producto> productos;
+	List<Product> products;
 	
-	@ManyToMany(mappedBy = "boxesGuardados")
-	List<Cliente> clientes;
+	@ManyToMany(mappedBy = "savedBoxes")
+	List<Client> clients;
 	
 	@OneToMany(mappedBy = "box")
-	List<Suscripcion> suscripciones;
+	List<Subscription> subscription;
 	
 }

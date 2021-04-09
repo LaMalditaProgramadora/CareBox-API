@@ -14,9 +14,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class RespuestaDTO {
-	private int estado;
-	private String mensaje;
-	private List<CategoriaDTO> categorias;
-	private List<ProductoDTO> productos;
+public class ResponseDTO {
+	private int status;
+	private String message;
+	private List<CategoryDTO> categories;
+	private List<ProductDTO> products;
+	private ClientDTO client;
+	private AdministratorDTO administrator;
+	private List<BoxDTO> boxes;
+	private BoxDTO box;
 }

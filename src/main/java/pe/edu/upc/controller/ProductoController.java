@@ -10,74 +10,94 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.upc.dto.ProductoDTO;
-import pe.edu.upc.dto.RespuestaDTO;
-import pe.edu.upc.service.ProductoService;
+import pe.edu.upc.dto.ProductDTO;
+import pe.edu.upc.dto.ResponseDTO;
+import pe.edu.upc.service.ProductService;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "/productos")
+@RequestMapping(path = "/products")
 public class ProductoController {
 
 	@Autowired
-	private ProductoService productoService;
+	private ProductService productService;
 
-	@GetMapping(path = "/listarProductos", produces = "application/json")
-	public ResponseEntity<?> listarProductos() {
-		RespuestaDTO respuestaDTO = new RespuestaDTO();
+	@GetMapping(path = "/listAll", produces = "application/json")
+	public ResponseEntity<?> listAll() {
+		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
-			List<ProductoDTO> productosDTO = productoService.listarProductos();
-			if (productosDTO.size() == 0) {
-				respuestaDTO.setEstado(0);
-				respuestaDTO.setMensaje("Sin resultados");
+			List<ProductDTO> productosDTO = productService.listAll();
+			if (productosDTO == null) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
 			} else {
-				respuestaDTO.setEstado(1);
-				respuestaDTO.setMensaje("Productos encontrados");
-				respuestaDTO.setProductos(productosDTO);
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Productos encontrados");
+				respuestaDTO.setProducts(productosDTO);
 			}
 		} catch (Exception e) {
-			respuestaDTO.setEstado(-1);
-			respuestaDTO.setMensaje("Error en el servidor");
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
 		}
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/listarProductosPorIdCategoria", produces = "application/json")
-	public ResponseEntity<?> listarProductosPorIdCategoria(@RequestParam int idCategoria) {
-		RespuestaDTO respuestaDTO = new RespuestaDTO();
+	@GetMapping(path = "/listByIdCategory", produces = "application/json")
+	public ResponseEntity<?> listByIdCategory(@RequestParam int idCategory) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
-			List<ProductoDTO> productosDTO = productoService.listarProductosPorIdCategoria(idCategoria);
-			if (productosDTO.size() == 0) {
-				respuestaDTO.setEstado(0);
-				respuestaDTO.setMensaje("Sin resultados");
+			List<ProductDTO> productosDTO = productService.listByIdCategory(idCategory);
+			if (productosDTO == null) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
 			} else {
-				respuestaDTO.setEstado(1);
-				respuestaDTO.setMensaje("Productos encontrados");
-				respuestaDTO.setProductos(productosDTO);
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Productos encontrados");
+				respuestaDTO.setProducts(productosDTO);
 			}
 		} catch (Exception e) {
-			respuestaDTO.setEstado(-1);
-			respuestaDTO.setMensaje("Error en el servidor");
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
 		}
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/listarProductosPorNombre", produces = "application/json")
-	public ResponseEntity<?> listarProductosPorNombre(@RequestParam String nombre) {
-		RespuestaDTO respuestaDTO = new RespuestaDTO();
+	@GetMapping(path = "/listByName", produces = "application/json")
+	public ResponseEntity<?> listByName(@RequestParam String name) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
-			List<ProductoDTO> productosDTO = productoService.listarProductosPorNombre(nombre);
-			if (productosDTO.size() == 0) {
-				respuestaDTO.setEstado(0);
-				respuestaDTO.setMensaje("Sin resultados");
+			List<ProductDTO> productosDTO = productService.listByName(name);
+			if (productosDTO == null) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
 			} else {
-				respuestaDTO.setEstado(1);
-				respuestaDTO.setMensaje("Productos encontrados");
-				respuestaDTO.setProductos(productosDTO);
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Productos encontrados");
+				respuestaDTO.setProducts(productosDTO);
 			}
 		} catch (Exception e) {
-			respuestaDTO.setEstado(-1);
-			respuestaDTO.setMensaje("Error en el servidor");
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+		return ResponseEntity.ok(respuestaDTO);
+	}
+	
+	@GetMapping(path = "/listByIdCategoryAndName", produces = "application/json")
+	public ResponseEntity<?> listByIdCategoryAndName(@RequestParam int idCategory, @RequestParam String name) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			List<ProductDTO> productosDTO = productService.listByCategoryIdCategoryAndNameContainingIgnoreCase(idCategory, name);
+			if (productosDTO == null) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
+			} else {
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Productos encontrados");
+				respuestaDTO.setProducts(productosDTO);
+			}
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
 		}
 		return ResponseEntity.ok(respuestaDTO);
 	}

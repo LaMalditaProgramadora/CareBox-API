@@ -23,36 +23,36 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "clientes")
+@Table(name = "clients")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente {
+public class Client {
 
 	@Id
-	@Column(name = "idCliente")
+	@Column(name = "idClient")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idCliente;
+	private int idClient;
 
-	@Column(name = "nombres")
-	private String nombres;
+	@Column(name = "names")
+	private String names;
 
-	@Column(name = "apellidos")
-	private String apellidos;
+	@Column(name = "lastNames")
+	private String lastNames;
 
-	@Column(name = "telefono")
-	private String telefono;
+	@Column(name = "phone")
+	private String phone;
 
-	@Column(name = "direccion")
-	private String direccion;
+	@Column(name = "adress")
+	private String adress;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-	private Usuario usuario;
+	@JoinColumn(name = "idUserLogin", referencedColumnName = "idUserLogin")
+	private UserLogin userLogin;
 
 	@ManyToMany
-	@JoinTable(name = "clienteBox", joinColumns = @JoinColumn(name = "idCliente"), inverseJoinColumns = @JoinColumn(name = "idBox"))
-	private List<Box> boxesGuardados;
+	@JoinTable(name = "clientBox", joinColumns = @JoinColumn(name = "idClient"), inverseJoinColumns = @JoinColumn(name = "idBox"))
+	private List<Box> savedBoxes;
 	
-	@OneToMany(mappedBy = "cliente")
-	List<Suscripcion> suscripciones;
+	@OneToMany(mappedBy = "client")
+	List<Subscription> subscriptions;
 }

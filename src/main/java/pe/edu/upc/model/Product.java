@@ -21,33 +21,33 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "productos")
+@Table(name = "products")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Producto {
+public class Product {
 
 	@Id
-	@Column(name = "idProducto")
+	@Column(name = "idProduct")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idProducto;
+	private int idProduct;
 
-	@Column(name = "nombre")
-	private String nombre;
+	@Column(name = "name")
+	private String name;
 
-	@Column(name = "marca")
-	private String marca;
+	@Column(name = "brand")
+	private String brand;
 
-	@Column(name = "precio")
-	private float precio;
+	@Column(name = "price")
+	private double price;
 
-	@Column(name = "descripcion")
-	private String descripcion;
+	@Column(name = "description")
+	private String description;
 
 	@ManyToOne
-	@JoinColumn(name = "idCategoria", nullable = false)
-	private Categoria categoria;
+	@JoinColumn(name = "idCategory", nullable = false)
+	private Category category;
 
 	@ManyToMany
-	@JoinTable(name = "productoBox", joinColumns = @JoinColumn(name = "idProducto"), inverseJoinColumns = @JoinColumn(name = "idBox"))
+	@JoinTable(name = "productBox", joinColumns = @JoinColumn(name = "idProduct"), inverseJoinColumns = @JoinColumn(name = "idBox"))
 	private List<Box> boxes;
 }

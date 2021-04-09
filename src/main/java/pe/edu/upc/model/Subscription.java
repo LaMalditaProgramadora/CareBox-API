@@ -17,36 +17,36 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "suscripciones")
+@Table(name = "subscription")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Suscripcion {
+public class Subscription {
 
 	@Id
-	@Column(name = "idSuscripcion")
+	@Column(name = "idSubscription")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idSuscripcion;
+	private int idSubscription;
 
-	@Column(name = "fechaDeEntrega")
-	private String fechaDeEntrega;
+	@Column(name = "deliveryDate")
+	private String deliveryDate;
 
-	@Column(name = "entergadoEsteMes")
-	private boolean entergadoEsteMes;
+	@Column(name = "deliveredThisMonth")
+	private boolean deliveredThisMonth;
 
-	@Column(name = "entregasRealizadas")
-	private int entregasRealizadas;
+	@Column(name = "deliveries")
+	private int deliveries;
 
-	@Column(name = "direccion")
-	private String direccion;
+	@Column(name = "adress")
+	private String adress;
 
-	@Column(name = "precio")
-	private float precio;
+	@Column(name = "price")
+	private float price;
 
 	@ManyToOne
 	@JoinColumn(name = "idBox", nullable = false)
 	private Box box;
 
 	@ManyToOne
-	@JoinColumn(name = "idCliente", nullable = false)
-	private Cliente cliente;
+	@JoinColumn(name = "idClient", nullable = false)
+	private Client client;
 }

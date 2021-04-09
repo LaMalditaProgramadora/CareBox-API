@@ -16,25 +16,25 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "usuarios")
+@Table(name = "usersLogin")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class UserLogin {
 
 	@Id
-	@Column(name = "idUsuario")
+	@Column(name = "idUserLogin")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
+	private int idUserLogin;
 
-	@Column(name = "correo")
-	private String correo;
+	@Column(name = "email")
+	private String email;
 
-	@Column(name = "contrasena")
-	private String contrasena;
+	@Column(name = "password")
+	private String password;
 
-	@OneToOne(mappedBy = "usuario")
-	private Cliente cliente;
+	@OneToOne(mappedBy = "userLogin")
+	private Client client;
 
-	@OneToOne(mappedBy = "usuario")
-	private Administrador administrador;
+	@OneToOne(mappedBy = "userLogin")
+	private Administrator administrator;
 }
