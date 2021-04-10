@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -49,8 +48,7 @@ public class Client {
 	@JoinColumn(name = "idUserLogin", referencedColumnName = "idUserLogin")
 	private UserLogin userLogin;
 
-	@ManyToMany
-	@JoinTable(name = "clientBox", joinColumns = @JoinColumn(name = "idClient"), inverseJoinColumns = @JoinColumn(name = "idBox"))
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Box> savedBoxes;
 	
 	@OneToMany(mappedBy = "client")

@@ -64,8 +64,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public List<SubscriptionDTO> listTodaySubscription() {
 		 Date date = Calendar.getInstance().getTime();  
-         DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");  
-         String strDate = dateFormat.format(date);  
+         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");  
+         String strDate = dateFormat.format(date);
 		List<Subscription> subscriptions = subscriptionRepository.findByDeliveryDate(strDate);
 		return subscriptions.stream().map(subscription -> modelMapper.map(subscription, SubscriptionDTO.class)).collect(Collectors.toList());
 	}

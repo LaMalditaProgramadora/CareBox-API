@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -47,7 +46,6 @@ public class Product {
 	@JoinColumn(name = "idCategory", nullable = false)
 	private Category category;
 
-	@ManyToMany
-	@JoinTable(name = "productBox", joinColumns = @JoinColumn(name = "idProduct"), inverseJoinColumns = @JoinColumn(name = "idBox"))
+	@ManyToMany(mappedBy = "products")
 	private List<Box> boxes;
 }

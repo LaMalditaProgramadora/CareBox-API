@@ -2,6 +2,7 @@ package pe.edu.upc.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Box {
 	@Column(name = "name")
 	private String name;
 	
-	@ManyToMany(mappedBy = "boxes")
+	@ManyToMany(cascade = CascadeType.ALL)
 	List<Product> products;
 	
 	@ManyToMany(mappedBy = "savedBoxes")

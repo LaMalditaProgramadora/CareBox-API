@@ -37,6 +37,7 @@ public class BoxServiceImpl implements BoxService {
 	public List<BoxDTO> listByPersonalized(boolean personalized) {
 		List<Box> boxes = boxRepository.findByPersonalized(personalized);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
+		
 	}
 
 	@Override
