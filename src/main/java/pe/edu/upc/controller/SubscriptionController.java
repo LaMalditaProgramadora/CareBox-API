@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upc.dto.ResponseDTO;
 import pe.edu.upc.dto.SubscriptionCreateDTO;
 import pe.edu.upc.dto.SubscriptionDTO;
+import pe.edu.upc.dto.SuscriptionUpdateDTO;
 import pe.edu.upc.service.SubscriptionService;
 
 @CrossOrigin
@@ -117,7 +118,7 @@ public class SubscriptionController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@PutMapping(path = "/montlyUpdate", produces = "application/json")
+	@GetMapping(path = "/montlyUpdate", produces = "application/json")
 	public ResponseEntity<?> montlyUpdate() {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
@@ -132,10 +133,10 @@ public class SubscriptionController {
 	}
 	
 	@PutMapping(path = "/updateDeliveredThisMonth", produces = "application/json")
-	public ResponseEntity<?> updateDeliveredThisMonth(@RequestParam int idSubscription, @RequestParam boolean deliveredThisMonth) {
+	public ResponseEntity<?> updateDeliveredThisMonth(@RequestBody SuscriptionUpdateDTO suscriptionUpdateDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
-			subscriptionService.updateDeliveredThisMonth(idSubscription, deliveredThisMonth);
+			subscriptionService.updateDeliveredThisMonth(suscriptionUpdateDTO.getIdSubscription(), suscriptionUpdateDTO.isDeliveredThisMonth());
 			respuestaDTO.setStatus(1);
 			respuestaDTO.setMessage("Actualización exitosa");
 		} catch (Exception e) {
