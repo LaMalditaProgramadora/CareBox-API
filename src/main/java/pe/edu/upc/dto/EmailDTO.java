@@ -9,11 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDTO {
-	private int idClient;
-	private String names;
-	private String lastNames;
-	private String phone;
-	private String adress;
-	private EmailDTO userLogin;
+public class EmailDTO {
+	private String email;
 }
