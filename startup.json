@@ -1,0 +1,10 @@
+{
+    "name": "my-server",
+    "script": "java",
+    "args": [
+        "-jar",
+        "target/CareBoxApi-1.0.war"
+    ],
+    "exec_interpreter": "",
+    "exec_mode": "fork"
+}
