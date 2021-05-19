@@ -18,4 +18,5 @@ public class SubscriptionDTO {
 	private String adress;
 	private float price;
 	private BoxDTO box;
+	private ClientDTO client;
 }
