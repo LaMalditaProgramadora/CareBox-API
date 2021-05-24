@@ -1,5 +1,5 @@
 {
-    "name": "my-server",
+    "name": "carebox-api",
     "script": "java",
     "args": [
         "-jar",
