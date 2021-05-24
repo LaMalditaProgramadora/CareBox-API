@@ -1,3 +1,5 @@
 #!/bin/bash
 cd /home/ubuntu/app
-sudo mvn install
+sudo su
+mvn install
+exit
