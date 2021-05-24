@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/app
-mvn install
+mvn install -DskipTests
