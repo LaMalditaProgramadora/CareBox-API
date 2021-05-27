@@ -118,7 +118,7 @@ public class SubscriptionController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/montlyUpdate", produces = "application/json")
+	@PutMapping(path = "/montlyUpdate", produces = "application/json")
 	public ResponseEntity<?> montlyUpdate() {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
