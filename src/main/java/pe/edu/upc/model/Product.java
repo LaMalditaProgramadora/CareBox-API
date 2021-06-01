@@ -32,6 +32,9 @@ public class Product {
 
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "url", length = 1000)
+	private String url;
 
 	@Column(name = "brand")
 	private String brand;
