@@ -41,8 +41,8 @@ public class Client {
 	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "adress")
-	private String adress;
+	@Column(name = "address")
+	private String address;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "idUserLogin", referencedColumnName = "idUserLogin")

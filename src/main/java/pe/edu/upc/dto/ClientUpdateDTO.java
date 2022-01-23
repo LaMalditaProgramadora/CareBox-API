@@ -14,5 +14,5 @@ public class ClientUpdateDTO {
 	private String names;
 	private String lastNames;
 	private String phone;
-	private String adress;
+	private String address;
 }

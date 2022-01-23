@@ -54,7 +54,7 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public List<BoxDTO> listByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(boolean personalized,
-			float priceMin, float priceMax) {
+			double priceMin, double priceMax) {
 		List<Box> boxes = boxRepository.findByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(personalized,
 				priceMin, priceMax);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
@@ -62,7 +62,7 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public List<BoxDTO> listByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(boolean personalized,
-			String name, float priceMin, float priceMax) {
+			String name, double priceMin, double priceMax) {
 		List<Box> boxes = boxRepository.findByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(
 				personalized, name, priceMin, priceMax);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());

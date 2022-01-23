@@ -89,10 +89,10 @@ public class BoxController {
 	}
 
 	@GetMapping(path = "/listDefaultAndPriceMinAndPriceMax", produces = "application/json")
-	public ResponseEntity<?> listDefaultAndPriceMinAndPriceMax(@RequestParam float priceMin,
-			@RequestParam float priceMax) {
+	public ResponseEntity<?> listDefaultAndPriceMinAndPriceMax(@RequestParam double priceMin,
+			@RequestParam double priceMax) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
-		try {
+		
 			List<BoxDTO> boxesDTO = boxService.listByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(false,
 					priceMin, priceMax);
 			if (boxesDTO.size() == 0) {
@@ -103,16 +103,13 @@ public class BoxController {
 				respuestaDTO.setMessage("Boxes encontrados");
 				respuestaDTO.setBoxes(boxesDTO);
 			}
-		} catch (Exception e) {
-			respuestaDTO.setStatus(-2);
-			respuestaDTO.setMessage("Error en el servidor");
-		}
+
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
 	@GetMapping(path = "/listDefaultAndNameAndPriceMinAndPriceMax", produces = "application/json")
 	public ResponseEntity<?> listDefaultAndNameAndPriceMinAndPriceMax(@RequestParam String name,
-			@RequestParam float priceMin, @RequestParam float priceMax) {
+			@RequestParam double priceMin, @RequestParam double priceMax) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
 			List<BoxDTO> boxesDTO = boxService.listByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(
@@ -148,7 +145,7 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@PostMapping(path = "/createDeafult", consumes = "application/json", produces = "application/json")
+	@PostMapping(path = "/createDefault", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> createDeafult(@RequestBody BoxCreateDTO boxCreateDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {

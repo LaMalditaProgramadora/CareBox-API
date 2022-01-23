@@ -62,7 +62,7 @@ public class ClientServiceImpl implements ClientService {
 	public int update(ClientUpdateDTO clientUpdateDTO) {
 		Client client = clientRepository.findByUserLoginEmail(clientUpdateDTO.getEmail());
 		if (client != null) {
-			client.setAdress(clientUpdateDTO.getAdress());
+			client.setAddress(clientUpdateDTO.getAddress());
 			client.setLastNames(clientUpdateDTO.getLastNames());
 			client.setNames(clientUpdateDTO.getNames());
 			client.setPhone(clientUpdateDTO.getPhone());
