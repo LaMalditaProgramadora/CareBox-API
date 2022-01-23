@@ -8,6 +8,7 @@ import pe.edu.upc.dto.BoxUpdateDTO;
 import pe.edu.upc.dto.SaveDefaultBoxDTO;
 
 public interface BoxService {
+	BoxDTO listById(int idBox);
 	List<BoxDTO> listByPersonalized(boolean personalized);
 	List<BoxDTO> listByClientsUserLoginEmail(String email);
 	List<BoxDTO> listByPersonalizedAndName(boolean personalized, String name);

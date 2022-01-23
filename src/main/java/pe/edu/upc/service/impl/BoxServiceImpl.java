@@ -140,4 +140,10 @@ public class BoxServiceImpl implements BoxService {
 		return modelMapper.map(box, BoxDTO.class);
 	}
 
+	@Override
+	public BoxDTO listById(int idBox) {
+		Box box = boxRepository.findById(idBox).get();
+		return modelMapper.map(box, BoxDTO.class);
+	}
+
 }

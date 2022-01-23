@@ -28,6 +28,26 @@ public class BoxController {
 	@Autowired
 	private BoxService boxService;
 
+	@GetMapping(path = "/listById", produces = "application/json")
+	public ResponseEntity<?> listSavedBoxes(@RequestParam int idBox) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			BoxDTO boxDTO = boxService.listById(idBox);
+			if (boxDTO == null) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultado");
+			} else {
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Box encontrado");
+				respuestaDTO.setBox(boxDTO);
+			}
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+		return ResponseEntity.ok(respuestaDTO);
+	}
+
 	@GetMapping(path = "/listSavedBoxes", produces = "application/json")
 	public ResponseEntity<?> listSavedBoxes(@RequestParam String email) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
@@ -92,17 +112,17 @@ public class BoxController {
 	public ResponseEntity<?> listDefaultAndPriceMinAndPriceMax(@RequestParam double priceMin,
 			@RequestParam double priceMax) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
-		
-			List<BoxDTO> boxesDTO = boxService.listByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(false,
-					priceMin, priceMax);
-			if (boxesDTO.size() == 0) {
-				respuestaDTO.setStatus(0);
-				respuestaDTO.setMessage("Sin resultados");
-			} else {
-				respuestaDTO.setStatus(1);
-				respuestaDTO.setMessage("Boxes encontrados");
-				respuestaDTO.setBoxes(boxesDTO);
-			}
+
+		List<BoxDTO> boxesDTO = boxService.listByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(false,
+				priceMin, priceMax);
+		if (boxesDTO.size() == 0) {
+			respuestaDTO.setStatus(0);
+			respuestaDTO.setMessage("Sin resultados");
+		} else {
+			respuestaDTO.setStatus(1);
+			respuestaDTO.setMessage("Boxes encontrados");
+			respuestaDTO.setBoxes(boxesDTO);
+		}
 
 		return ResponseEntity.ok(respuestaDTO);
 	}
@@ -160,7 +180,7 @@ public class BoxController {
 
 		return ResponseEntity.ok(respuestaDTO);
 	}
-	
+
 	@PutMapping(path = "/saveDefaultBox", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> saveDefaultBox(@RequestBody SaveDefaultBoxDTO saveDefaultBoxDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
@@ -176,7 +196,7 @@ public class BoxController {
 
 		return ResponseEntity.ok(respuestaDTO);
 	}
-	
+
 	@PutMapping(path = "/updateBoxPersonalized", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> updateBoxPersonalized(@RequestBody BoxUpdateDTO boxUpdateDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
