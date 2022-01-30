@@ -11,6 +11,7 @@ public interface BoxService {
 	BoxDTO listById(int idBox);
 	List<BoxDTO> listByPersonalized(boolean personalized);
 	List<BoxDTO> listByClientsUserLoginEmail(String email);
+	List<BoxDTO> listByPersonalizedAndNameAndClientsUserLoginEmail(boolean personalized, String name,String email);
 	List<BoxDTO> listByPersonalizedAndName(boolean personalized, String name);
 	List<BoxDTO> listByPersonalizedAndPriceGreaterThanEqualAndPriceLessThanEqual(boolean personalized, double priceMin, double priceMax);
 	List<BoxDTO> listByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(boolean personalized, String name, double priceMin, double priceMax);

@@ -68,6 +68,26 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
+	@GetMapping(path = "/listSavedBoxesByName", produces = "application/json")
+	public ResponseEntity<?> listSavedBoxes(@RequestParam String email, @RequestParam String name) {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			List<BoxDTO> boxesDTO = boxService.listByPersonalizedAndNameAndClientsUserLoginEmail(true, name, email);
+			if (boxesDTO.size() == 0) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
+			} else {
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Boxes encontrados");
+				respuestaDTO.setBoxes(boxesDTO);
+			}
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+		return ResponseEntity.ok(respuestaDTO);
+	}
+
 	@GetMapping(path = "/listDefault", produces = "application/json")
 	public ResponseEntity<?> listDefault() {
 		ResponseDTO respuestaDTO = new ResponseDTO();
@@ -88,7 +108,7 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/listDefaultAndName", produces = "application/json")
+	@GetMapping(path = "/listDefaultByName", produces = "application/json")
 	public ResponseEntity<?> listDefaultAndName(@RequestParam String name) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
 		try {
@@ -108,7 +128,7 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/listDefaultAndPriceMinAndPriceMax", produces = "application/json")
+	@GetMapping(path = "/listDefaultByPriceMinAndPriceMax", produces = "application/json")
 	public ResponseEntity<?> listDefaultAndPriceMinAndPriceMax(@RequestParam double priceMin,
 			@RequestParam double priceMax) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
@@ -127,7 +147,7 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
-	@GetMapping(path = "/listDefaultAndNameAndPriceMinAndPriceMax", produces = "application/json")
+	@GetMapping(path = "/listDefaultByNameAndPriceMinAndPriceMax", produces = "application/json")
 	public ResponseEntity<?> listDefaultAndNameAndPriceMinAndPriceMax(@RequestParam String name,
 			@RequestParam double priceMin, @RequestParam double priceMax) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
