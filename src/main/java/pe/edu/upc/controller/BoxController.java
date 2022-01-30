@@ -201,6 +201,7 @@ public class BoxController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 
+	/*
 	@PutMapping(path = "/saveDefaultBox", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> saveDefaultBox(@RequestBody SaveDefaultBoxDTO saveDefaultBoxDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();
@@ -215,7 +216,7 @@ public class BoxController {
 		}
 
 		return ResponseEntity.ok(respuestaDTO);
-	}
+	}*/
 
 	@PutMapping(path = "/updateBoxPersonalized", consumes = "application/json", produces = "application/json")
 	public ResponseEntity<?> updateBoxPersonalized(@RequestBody BoxUpdateDTO boxUpdateDTO) {
