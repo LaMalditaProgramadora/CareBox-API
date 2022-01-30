@@ -12,7 +12,6 @@ import lombok.Setter;
 public class BoxCreateDTO {
 
 	private String email;
-	private double price;
 	private String name;
 	private int[] idProducts;
 

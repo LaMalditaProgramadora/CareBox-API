@@ -31,14 +31,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Autowired
 	private ClientRepository clientRepository;
 	ModelMapper modelMapper = new ModelMapper();
-
+	private double shippingFee = 0.05;
+	
 	@Override
 	public SubscriptionDTO create(SubscriptionCreateDTO subscriptionCreateDTO) {
 		Box box = boxRepository.findById(subscriptionCreateDTO.getIdBox()).get();
 		Client client = clientRepository.findByUserLoginEmail(subscriptionCreateDTO.getEmail());
 		Subscription subscription = new Subscription();
-		subscription.setAdress(subscriptionCreateDTO.getAdress());
-		subscription.setPrice(subscriptionCreateDTO.getPrice());
+		subscription.setAddress(subscriptionCreateDTO.getAdress());
+		subscription.setPrice(box.getPrice() + shippingFee * box.getPrice());
 		subscription.setDeliveryDate(subscriptionCreateDTO.getDeliveryDate());
 		subscription.setDeliveredThisMonth(false);
 		subscription.setDeliveries(0);

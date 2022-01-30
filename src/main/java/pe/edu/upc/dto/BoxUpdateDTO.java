@@ -13,7 +13,6 @@ public class BoxUpdateDTO {
 
 	private int idBox;
 	private String email;
-	private double price;
 	private String name;
 	private int[] idProducts;
 

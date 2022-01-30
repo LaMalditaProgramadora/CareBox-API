@@ -17,7 +17,6 @@ import pe.edu.upc.dto.BoxCreateDTO;
 import pe.edu.upc.dto.BoxDTO;
 import pe.edu.upc.dto.BoxUpdateDTO;
 import pe.edu.upc.dto.ResponseDTO;
-import pe.edu.upc.dto.SaveDefaultBoxDTO;
 import pe.edu.upc.service.BoxService;
 
 @CrossOrigin

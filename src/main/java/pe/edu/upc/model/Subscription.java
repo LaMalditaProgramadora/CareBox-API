@@ -36,11 +36,11 @@ public class Subscription {
 	@Column(name = "deliveries")
 	private int deliveries;
 
-	@Column(name = "adress")
-	private String adress;
+	@Column(name = "address")
+	private String address;
 
 	@Column(name = "price")
-	private float price;
+	private double price;
 
 	@ManyToOne
 	@JoinColumn(name = "idBox", nullable = false)

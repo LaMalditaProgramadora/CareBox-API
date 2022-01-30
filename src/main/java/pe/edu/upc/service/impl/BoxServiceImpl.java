@@ -37,7 +37,7 @@ public class BoxServiceImpl implements BoxService {
 	public List<BoxDTO> listByPersonalized(boolean personalized) {
 		List<Box> boxes = boxRepository.findByPersonalized(personalized);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
-		
+
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class BoxServiceImpl implements BoxService {
 	public BoxDTO createPersonalized(BoxCreateDTO boxCreateDTO) {
 		Box box = new Box();
 		box.setName(boxCreateDTO.getName());
-		box.setPrice(boxCreateDTO.getPrice());
+		double price = 0;
 		box.setPersonalized(true);
 		List<Product> products = new ArrayList<Product>();
 		Product product = new Product();
@@ -81,7 +81,9 @@ public class BoxServiceImpl implements BoxService {
 			product = new Product();
 			product = productRepository.findById(idProduct).get();
 			products.add(product);
+			price = price + product.getPrice();
 		}
+		box.setPrice(price);
 		box.setProducts(products);
 		boxRepository.save(box);
 		Client client = clientRepository.findByUserLoginEmail(boxCreateDTO.getEmail());
@@ -97,7 +99,7 @@ public class BoxServiceImpl implements BoxService {
 	public BoxDTO createDefault(BoxCreateDTO boxCreateDTO) {
 		Box box = new Box();
 		box.setName(boxCreateDTO.getName());
-		box.setPrice(boxCreateDTO.getPrice());
+		double price = 0;
 		box.setPersonalized(false);
 		List<Product> products = new ArrayList<Product>();
 		Product product = new Product();
@@ -105,7 +107,9 @@ public class BoxServiceImpl implements BoxService {
 			product = new Product();
 			product = productRepository.findById(idProduct).get();
 			products.add(product);
+			price = price + product.getPrice();
 		}
+		box.setPrice(price);
 		box.setProducts(products);
 		boxRepository.save(box);
 		return modelMapper.map(box, BoxDTO.class);
@@ -127,14 +131,16 @@ public class BoxServiceImpl implements BoxService {
 	public BoxDTO update(BoxUpdateDTO boxUpdateDTO) {
 		Box box = boxRepository.findById(boxUpdateDTO.getIdBox()).get();
 		box.setName(boxUpdateDTO.getName());
-		box.setPrice(boxUpdateDTO.getPrice());
+		double price = 0;
 		List<Product> products = new ArrayList<Product>();
 		Product product = new Product();
 		for (int idProduct : boxUpdateDTO.getIdProducts()) {
 			product = new Product();
 			product = productRepository.findById(idProduct).get();
 			products.add(product);
+			price = price + product.getPrice();
 		}
+		box.setPrice(price);
 		box.setProducts(products);
 		boxRepository.save(box);
 		return modelMapper.map(box, BoxDTO.class);
