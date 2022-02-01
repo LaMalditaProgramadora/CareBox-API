@@ -48,7 +48,7 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public List<BoxDTO> listByPersonalizedAndName(boolean personalized, String name) {
-		List<Box> boxes = boxRepository.findByPersonalized(personalized);
+		List<Box> boxes = boxRepository.findByPersonalizedAndName(personalized, name);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
 	}
 
