@@ -15,7 +15,7 @@ public class SubscriptionDTO {
 	private String deliveryDate;
 	private boolean deliveredThisMonth;
 	private int deliveries;
-	private String adress;
+	private String address;
 	private float price;
 	private BoxDTO box;
 	private ClientDTO client;

@@ -38,7 +38,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Box box = boxRepository.findById(subscriptionCreateDTO.getIdBox()).get();
 		Client client = clientRepository.findByUserLoginEmail(subscriptionCreateDTO.getEmail());
 		Subscription subscription = new Subscription();
-		subscription.setAddress(subscriptionCreateDTO.getAdress());
+		subscription.setAddress(subscriptionCreateDTO.getAddress());
 		subscription.setPrice(box.getPrice() + shippingFee * box.getPrice());
 		subscription.setDeliveryDate(subscriptionCreateDTO.getDeliveryDate());
 		subscription.setDeliveredThisMonth(false);

@@ -10,9 +10,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubscriptionCreateDTO {
+	private CardDetailsDTO cardDetails;
 	private String email;
 	private String deliveryDate;
-	private String adress;
+	private String address;
 	private int idBox;
 	
 }
