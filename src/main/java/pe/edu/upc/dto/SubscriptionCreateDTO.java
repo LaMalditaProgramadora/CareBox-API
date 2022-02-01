@@ -13,7 +13,6 @@ public class SubscriptionCreateDTO {
 	private CardDetailsDTO cardDetails;
 	private String email;
 	private String deliveryDate;
-	private String address;
 	private int idBox;
 	
 }
