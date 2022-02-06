@@ -1,6 +1,7 @@
 package pe.edu.upc.service.impl;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +40,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Client client = clientRepository.findByUserLoginEmail(subscriptionCreateDTO.getEmail());
 		Subscription subscription = new Subscription();
 		subscription.setAddress(client.getAddress());
-		subscription.setPrice(box.getPrice() + shippingFee * box.getPrice());
+		double price = box.getPrice() + shippingFee * box.getPrice();
+		DecimalFormat df = new DecimalFormat("#.##");
+		subscription.setPrice(Double.valueOf(df.format(price)));
 		subscription.setDeliveryDate(subscriptionCreateDTO.getDeliveryDate());
 		subscription.setDeliveredThisMonth(false);
 		subscription.setDeliveries(0);

@@ -1,5 +1,6 @@
 package pe.edu.upc.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class BoxServiceImpl implements BoxService {
 	@Autowired
 	private ClientRepository clientRepository;
 	ModelMapper modelMapper = new ModelMapper();
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	@Override
 	public List<BoxDTO> listByPersonalized(boolean personalized) {
@@ -83,7 +85,7 @@ public class BoxServiceImpl implements BoxService {
 			products.add(product);
 			price = price + product.getPrice();
 		}
-		box.setPrice(price);
+		box.setPrice(Double.valueOf(df.format(price)));
 		box.setProducts(products);
 		boxRepository.save(box);
 		Client client = clientRepository.findByUserLoginEmail(boxCreateDTO.getEmail());
@@ -109,7 +111,7 @@ public class BoxServiceImpl implements BoxService {
 			products.add(product);
 			price = price + product.getPrice();
 		}
-		box.setPrice(price);
+		box.setPrice(Double.valueOf(df.format(price)));
 		box.setProducts(products);
 		boxRepository.save(box);
 		return modelMapper.map(box, BoxDTO.class);
@@ -140,7 +142,7 @@ public class BoxServiceImpl implements BoxService {
 			products.add(product);
 			price = price + product.getPrice();
 		}
-		box.setPrice(price);
+		box.setPrice(Double.valueOf(df.format(price)));
 		box.setProducts(products);
 		boxRepository.save(box);
 		return modelMapper.map(box, BoxDTO.class);
