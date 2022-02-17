@@ -70,7 +70,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public List<SubscriptionDTO> listTodaySubscription() {
 		Date date = Calendar.getInstance().getTime();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		List<Subscription> subscriptions = subscriptionRepository.findByDeliveryDate(strDate);
 		return subscriptions.stream().map(subscription -> modelMapper.map(subscription, SubscriptionDTO.class))
@@ -80,7 +80,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public List<SubscriptionDTO> listTodaySubscriptionByEmail(String email) {
 		Date date = Calendar.getInstance().getTime();
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String strDate = dateFormat.format(date);
 		List<Subscription> subscriptions = subscriptionRepository
 				.findByDeliveryDateAndClientUserLoginEmailContainingIgnoreCase(strDate, email);
@@ -92,12 +92,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	public void updateDeliveredThisMonth(int idSubscription, boolean deliveredThisMonth) throws ParseException {
 		Subscription subscription = subscriptionRepository.findById(idSubscription).get();
 		subscription.setDeliveredThisMonth(deliveredThisMonth);
-		subscription.setDeliveryDate(addMonth(subscription.getDeliveryDate()));
+		String dateAux = addMonth(subscription.getDeliveryDate());
+		subscription.setDeliveryDate(dateAux);
 		subscriptionRepository.save(subscription);
 	}
 
 	private String addMonth(String date) throws ParseException {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateAux = dateFormat.parse(date);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateAux);
@@ -107,7 +108,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	}
 	
 	private String addDay(String date) throws ParseException {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date dateAux = dateFormat.parse(date);
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(dateAux);
