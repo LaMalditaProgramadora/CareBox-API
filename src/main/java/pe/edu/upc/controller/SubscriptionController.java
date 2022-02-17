@@ -117,20 +117,6 @@ public class SubscriptionController {
 		}
 		return ResponseEntity.ok(respuestaDTO);
 	}
-
-	@PutMapping(path = "/montlyUpdate", produces = "application/json")
-	public ResponseEntity<?> montlyUpdate() {
-		ResponseDTO respuestaDTO = new ResponseDTO();
-		try {
-			subscriptionService.montlyUpdate();
-			respuestaDTO.setStatus(1);
-			respuestaDTO.setMessage("Actualización exitosa");
-		} catch (Exception e) {
-			respuestaDTO.setStatus(-2);
-			respuestaDTO.setMessage("Error en el servidor");
-		}
-		return ResponseEntity.ok(respuestaDTO);
-	}
 	
 	@PutMapping(path = "/updateDeliveredThisMonth", produces = "application/json")
 	public ResponseEntity<?> updateDeliveredThisMonth(@RequestBody SuscriptionUpdateDTO suscriptionUpdateDTO) {
