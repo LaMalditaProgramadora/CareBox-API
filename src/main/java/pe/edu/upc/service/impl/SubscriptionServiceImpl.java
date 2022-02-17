@@ -76,6 +76,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		return subscriptions.stream().map(subscription -> modelMapper.map(subscription, SubscriptionDTO.class))
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	public List<SubscriptionDTO> listSubscription() {
+		List<Subscription> subscriptions = subscriptionRepository.findAll();
+		return subscriptions.stream().map(subscription -> modelMapper.map(subscription, SubscriptionDTO.class))
+				.collect(Collectors.toList());
+	}
 
 	@Override
 	public List<SubscriptionDTO> listTodaySubscriptionByEmail(String email) {

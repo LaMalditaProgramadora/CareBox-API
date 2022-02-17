@@ -118,6 +118,26 @@ public class SubscriptionController {
 		return ResponseEntity.ok(respuestaDTO);
 	}
 	
+	@GetMapping(path = "/listSubscription", produces = "application/json")
+	public ResponseEntity<?> listSubscription() {
+		ResponseDTO respuestaDTO = new ResponseDTO();
+		try {
+			List<SubscriptionDTO> subscriptionsDTO = subscriptionService.listSubscription();
+			if (subscriptionsDTO.size() == 0) {
+				respuestaDTO.setStatus(0);
+				respuestaDTO.setMessage("Sin resultados");
+			} else {
+				respuestaDTO.setStatus(1);
+				respuestaDTO.setMessage("Subscripciones encontradas");
+				respuestaDTO.setSubscriptions(subscriptionsDTO);
+			}
+		} catch (Exception e) {
+			respuestaDTO.setStatus(-2);
+			respuestaDTO.setMessage("Error en el servidor");
+		}
+		return ResponseEntity.ok(respuestaDTO);
+	}
+	
 	@PutMapping(path = "/updateDeliveredThisMonth", produces = "application/json")
 	public ResponseEntity<?> updateDeliveredThisMonth(@RequestBody SuscriptionUpdateDTO suscriptionUpdateDTO) {
 		ResponseDTO respuestaDTO = new ResponseDTO();

@@ -50,7 +50,7 @@ public class BoxServiceImpl implements BoxService {
 
 	@Override
 	public List<BoxDTO> listByPersonalizedAndName(boolean personalized, String name) {
-		List<Box> boxes = boxRepository.findByPersonalizedAndName(personalized, name);
+		List<Box> boxes = boxRepository.findByPersonalizedAndNameContainingIgnoreCase(personalized, name);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
 	}
 
@@ -65,7 +65,7 @@ public class BoxServiceImpl implements BoxService {
 	@Override
 	public List<BoxDTO> listByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(boolean personalized,
 			String name, double priceMin, double priceMax) {
-		List<Box> boxes = boxRepository.findByPersonalizedAndNameAndPriceGreaterThanEqualAndPriceLessThanEqual(
+		List<Box> boxes = boxRepository.findByPersonalizedAndNameContainingIgnoreCaseAndPriceGreaterThanEqualAndPriceLessThanEqual(
 				personalized, name, priceMin, priceMax);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
 	}
@@ -157,7 +157,7 @@ public class BoxServiceImpl implements BoxService {
 	@Override
 	public List<BoxDTO> listByPersonalizedAndNameAndClientsUserLoginEmail(boolean personalized, String name,
 			String email) {
-		List<Box> boxes = boxRepository.findByPersonalizedAndNameAndClientsUserLoginEmail(personalized, name, email);
+		List<Box> boxes = boxRepository.findByPersonalizedAndNameContainingIgnoreCaseAndClientsUserLoginEmail(personalized, name, email);
 		return boxes.stream().map(box -> modelMapper.map(box, BoxDTO.class)).collect(Collectors.toList());
 	}
 

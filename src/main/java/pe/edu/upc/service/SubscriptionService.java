@@ -11,6 +11,7 @@ public interface SubscriptionService {
 	SubscriptionDTO cancel(int idSubscription);
 	List<SubscriptionDTO> listByEmail(String email);
 	List<SubscriptionDTO> listTodaySubscription();
+	List<SubscriptionDTO> listSubscription();
 	List<SubscriptionDTO> listTodaySubscriptionByEmail(String email);
 	void updateDeliveredThisMonth(int idSubscription, boolean deliveredThisMonth) throws ParseException;
 }
